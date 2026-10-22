@@ -230,6 +230,7 @@ npm start
 ```sh
 npm run check       # TypeScript, unit tests, production build
 npm run test:e2e    # Real Electron tests; requires a display
+npm audit          # Known advisories across runtime and build dependencies
 npm run pack       # Unpacked development app for the current platform
 npm run dist:mac    # Unsigned DMG + ZIP on macOS
 npm run dist:linux  # AppImage on Linux
@@ -241,6 +242,8 @@ On a Linux CI runner, use `xvfb-run -a npm run test:e2e`. Desktop tests use a lo
 The test harness uses `--no-sandbox` only when launched as root in a disposable test container. Production code keeps sandboxing enabled. Those container tests do not prove that the operating-system sandbox is working. [Validation notes](docs/VALIDATION.md) distinguish completed checks from remaining platform and security work.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a change. Useful contributions include native platform testing, migration from Arc exports, stronger session recovery, accessibility, browser compatibility, and maintained runtime upgrades. Open a focused [issue](https://github.com/davidjbeveridge/tangent/issues) with the behavior you want to improve and a reproducible example.
+
+Dependency changes also build and exercise the delivered installers on all four supported platform/architecture targets. CI rejects known moderate-or-higher dependency advisories and checks that Node type definitions match Electron's bundled Node major. [Dependency maintenance](docs/DEPENDENCIES.md) explains the version choices and the scoped packaging override.
 
 ### Architecture
 

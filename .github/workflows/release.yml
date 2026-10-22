@@ -4,6 +4,15 @@ name: Build unsigned installers
 on:
   push:
     tags: ['v*']
+  pull_request:
+    paths:
+      - package.json
+      - package-lock.json
+      - build/**
+      - scripts/after-pack.cjs
+      - scripts/check-packaged.mjs
+      - .github/workflows/release.yml
+      - .github/workflows/check.yml
   workflow_dispatch:
   workflow_call:
     inputs:

@@ -4,7 +4,7 @@ import { lstatSync, mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:
 import { tmpdir } from 'node:os';
 import { basename, join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { load } from 'js-yaml';
+import { CORE_SCHEMA, load } from 'js-yaml';
 
 assert(['darwin', 'win32'].includes(process.platform), 'Signed releases support macOS and Windows only');
 const version = JSON.parse(readFileSync('package.json', 'utf8')).version;
@@ -16,7 +16,13 @@ const run = (command, args, env = {}) => {
   assert.equal(result.status, 0, `${command} verification failed: ${result.stdout}\n${result.stderr}`);
   return `${result.stdout}\n${result.stderr}`;
 };
-const yaml = path => load(readFileSync(path, 'utf8'));
+const yaml = path => {
+  const stat = lstatSync(path);
+  assert(stat.isFile() && stat.size <= 64 * 1024, 'Update YAML must be a small regular file');
+  const data = load(readFileSync(path, 'utf8'), { schema: CORE_SCHEMA, maxDepth: 16, maxAliases: 0 });
+  assert(data && typeof data === 'object' && !Array.isArray(data) && !Object.hasOwn(data, '<<'), 'Update YAML must be an explicit mapping without merge configuration');
+  return data;
+};
 const verifyPolicy = resources => {
   const policy = JSON.parse(readFileSync(join(resources, 'update-policy.json'), 'utf8'));
   const feed = yaml(join(resources, 'app-update.yml'));

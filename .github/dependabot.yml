@@ -9,6 +9,11 @@ updates:
       timezone: Etc/UTC
     versioning-strategy: increase
     open-pull-requests-limit: 15
+    ignore:
+      # Node types describe Electron's bundled Node runtime, not the newest host Node.
+      # Upgrade this major deliberately when Electron's bundled Node major changes.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
     commit-message:
       prefix: deps
     groups:
