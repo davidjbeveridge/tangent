@@ -1,7 +1,7 @@
 {
   "name": "tangent-browser",
   "productName": "Tangent",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An independent open-source browser built to keep Arc-inspired browsing alive.",
   "private": true,
   "license": "MIT",
