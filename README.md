@@ -13,7 +13,17 @@ Spaces. Vertical tabs. Favorites that stay put. A command bar that gets out of y
 
 No account, subscription, API key, or Arc installation is required to use it.
 
-**Status: early development, version 0.1.0.** Real websites run in real Chromium browsing surfaces. Native browser tests cover macOS on Apple Silicon and Intel, Windows x64, and Linux x64, including profile isolation, session restore, split view, and popups. This is an experimental browser with substantial work ahead. [Get an installer](https://github.com/davidjbeveridge/tangent/releases) or [run it from source](#from-source).
+**Status: early development, version 0.1.1.** Real websites run in real Chromium browsing surfaces. Native browser tests cover macOS on Apple Silicon and Intel, Windows x64, and Linux x64, including profile isolation, session restore, split view, and popups. This is an experimental browser with substantial work ahead. [Get an installer](https://github.com/davidjbeveridge/tangent/releases) or [run it from source](#from-source).
+
+**[See Tangent in action](https://tangent-browser.davidjbeveridge.chatgpt.site/)** · [Download installers](https://github.com/davidjbeveridge/tangent/releases) · [Save your Arc tabs](docs/ARC_EXPORT.md)
+
+[![Actual Tangent browser on Linux, showing Spaces, pinned tabs, and two local sample pages in split view](docs/media/tangent-split.png)](https://tangent-browser.davidjbeveridge.chatgpt.site/#demo)
+
+*Actual application, with local sample pages. [Watch the 19-second workflow demo](https://tangent-browser.davidjbeveridge.chatgpt.site/#demo) or [inspect the recording's provenance](docs/media/README.md).*
+
+Created by [David Beveridge](https://github.com/davidjbeveridge), with an open invitation to [test and contribute](CONTRIBUTING.md).
+
+**Release provenance:** [v0.1.1](https://github.com/davidjbeveridge/tangent/releases/tag/v0.1.1) was built from [`104bf009`](https://github.com/davidjbeveridge/tangent/commit/104bf009800e7ed42af3c194aeec3e4c5379eb64), including the reviewed dependency and update-configuration hardening. [All source and native installer checks passed](https://github.com/davidjbeveridge/tangent/actions/runs/39862356973). Electron and Chromium are unchanged from v0.1.0; this is not a browser-engine update or a security audit.
 
 ## Why Tangent exists
 
@@ -60,8 +70,8 @@ Read the release notes before installing. Manual macOS builds use ad hoc signing
 If only FUSE is unavailable, [AppImage supports extracting the package](https://docs.appimage.org/user-guide/troubleshooting/fuse.html#extract-and-run-type-2-appimages). From a directory containing the downloaded file:
 
 ```sh
-chmod +x Tangent-0.1.0-linux-x86_64.AppImage
-./Tangent-0.1.0-linux-x86_64.AppImage --appimage-extract
+chmod +x Tangent-0.1.1-linux-x86_64.AppImage
+./Tangent-0.1.1-linux-x86_64.AppImage --appimage-extract
 ./squashfs-root/AppRun
 ```
 
@@ -103,15 +113,15 @@ Common commands for checking a downloaded file:
 
 ```sh
 # macOS
-shasum -a 256 "Tangent-0.1.0-mac-arm64.dmg"
+shasum -a 256 "Tangent-0.1.1-mac-arm64.dmg"
 
 # Linux
-sha256sum "Tangent-0.1.0-linux-x86_64.AppImage"
+sha256sum "Tangent-0.1.1-linux-x86_64.AppImage"
 ```
 
 ```powershell
 # Windows
-Get-FileHash ".\Tangent-0.1.0-win-x64.exe" -Algorithm SHA256
+Get-FileHash ".\Tangent-0.1.1-win-x64.exe" -Algorithm SHA256
 ```
 
 Use the actual filename from the release. Checksums detect a corrupt or mismatched download; they do not authenticate an unsigned publisher. Download from this repository's release page. See [Releasing and updating Tangent](docs/RELEASING.md) for the maintainer workflow.
@@ -195,6 +205,8 @@ There is no Chrome Web Store integration, password manager, private browsing, ad
 Tangent accepts HTTP/HTTPS pages and its own new-tab screen. External application schemes and arbitrary local files are blocked. Background tabs remain in memory until closed or archived; automatic resource suspension is not implemented. Closing or archiving a page does not yet provide complete protection for unsaved forms.
 
 An Arc export is not a Tangent session backup. Tangent's JSON import currently accepts its own backup format. You can open exported Arc links manually; a dedicated migration path is still missing.
+
+If you are leaving Arc, the [Arc tab-export checklist](docs/ARC_EXPORT.md) explains how to save and check your links before December 22, 2026, whichever browser you choose next.
 
 ## Privacy and local data
 
