@@ -1,0 +1,87 @@
+name: Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      ref:
+        description: Immutable commit to verify for a release
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.workflow }}-${{ github.ref }}-${{ inputs.ref || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Browser tests (${{ matrix.platform }})
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            platform: linux-x64
+          - os: windows-2025
+            platform: windows-x64
+          - os: macos-15
+            platform: macos-arm64
+          - os: macos-15-intel
+            platform: macos-x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install Linux desktop libraries
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y xvfb libnss3 libgtk-3-0t64 libasound2t64
+      - run: npm ci
+      - name: Verify pinned runtime and record bundled Chromium
+        run: node scripts/check-runtime.mjs --output runtime-versions.json
+      - run: npm run check
+      - name: Release guard regression fixtures
+        if: runner.os == 'Linux'
+        run: node scripts/check-release-workflow.mjs
+      - name: Desktop integration tests (Linux)
+        if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1440x1000x24 -nolisten tcp" npm run test:e2e
+      - name: Desktop integration tests (macOS and Windows)
+        if: runner.os != 'Linux'
+        run: npm run test:e2e
+      - name: Retain runtime evidence and failure diagnostics
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: browser-check-${{ matrix.platform }}-${{ inputs.ref || github.sha }}
+          path: |
+            runtime-versions.json
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  required:
+    name: Browser checks
+    if: always()
+    needs: check
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Require every platform to pass
+        env:
+          RESULT: ${{ needs.check.result }}
+        run: test "$RESULT" = success

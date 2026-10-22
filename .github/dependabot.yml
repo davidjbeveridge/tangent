@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      # Dependabot's "daily" means weekdays. This includes weekends.
+      interval: cron
+      cronjob: '0 9 * * *'
+      timezone: Etc/UTC
+    versioning-strategy: increase
+    open-pull-requests-limit: 15
+    commit-message:
+      prefix: deps
+    groups:
+      development-tools:
+        patterns: ['*']
+        exclude-patterns: [electron, electron-builder, electron-updater]
+        update-types: [minor, patch]
+    # Electron, builder, updater, and all major upgrades remain separate PRs.
+    # There is deliberately no automatic merge or release workflow.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '09:00'
+      timezone: Etc/UTC
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: ci

@@ -1,0 +1,112 @@
+{
+  "name": "tangent-browser",
+  "productName": "Tangent",
+  "version": "0.1.0",
+  "description": "An independent open-source browser built to keep Arc-inspired browsing alive.",
+  "private": true,
+  "license": "MIT",
+  "author": "Tangent contributors",
+  "main": "dist/main.cjs",
+  "engines": {
+    "node": ">=24.15.0"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "npm run build && electron .",
+    "start:built": "electron .",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test --test-isolation=none tests/*.test.ts",
+    "analyze:arc": "bash docs/rea/analyze-arc.sh",
+    "test:e2e": "npm run build && playwright test",
+    "check": "npm run typecheck && npm test && npm run build",
+    "pack": "npm run build && electron-builder --dir",
+    "dist:mac": "npm run build && electron-builder --mac dmg zip",
+    "dist:linux": "npm run build && electron-builder --linux AppImage",
+    "dist:win": "npm run build && electron-builder --win nsis",
+    "dist:signed": "npm run build && electron-builder --config electron-builder.release.cjs --publish never",
+    "update": "node scripts/update.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/js-yaml": "4.0.9",
+    "@types/node": "^24.0.0",
+    "electron": "45.0.0",
+    "electron-builder": "26.15.3",
+    "esbuild": "0.28.2",
+    "tsx": "4.23.15",
+    "typescript": "^5.9.0"
+  },
+  "build": {
+    "appId": "org.tangentbrowser.desktop",
+    "productName": "Tangent",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json",
+      "LICENSE",
+      "THIRD_PARTY_NOTICES.md"
+    ],
+    "extraResources": [
+      {
+        "from": "node_modules/electron/dist",
+        "to": "licenses/electron",
+        "filter": [
+          "LICENSE",
+          "LICENSES.chromium.html"
+        ]
+      },
+      {
+        "from": "LICENSE",
+        "to": "licenses/Tangent-LICENSE.txt"
+      },
+      {
+        "from": "THIRD_PARTY_NOTICES.md",
+        "to": "licenses/THIRD_PARTY_NOTICES.md"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "hardenedRuntime": false,
+      "icon": "build/icon.icns",
+      "identity": "-"
+    },
+    "linux": {
+      "category": "Network;WebBrowser;",
+      "target": [
+        "AppImage"
+      ],
+      "icon": "build/icon.png"
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "publish": null,
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+  },
+  "dependencies": {
+    "electron-updater": "6.8.9",
+    "js-yaml": "4.3.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidjbeveridge/tangent.git"
+  },
+  "homepage": "https://github.com/davidjbeveridge/tangent#readme",
+  "bugs": {
+    "url": "https://github.com/davidjbeveridge/tangent/issues"
+  }
+}

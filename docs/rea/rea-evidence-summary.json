@@ -1,0 +1,105 @@
+{
+  "schema": "arc-investigation-summary-v1",
+  "date": "2026-10-22",
+  "tool": {
+    "name": "REA",
+    "version": "6.7.0",
+    "source": "https://github.com/morluto/rea",
+    "npm_integrity": "sha512-yhIx2ioJYYT1C/tONfYeitC6LhnKmCh+ZwRUOgYuhSc733lGhkkt73zhug9WmLgxoMdKuqIYGCoBfD4fXkOhFw=="
+  },
+  "artifact": {
+    "url": "https://releases.arc.net/release/Arc-1.170.0-89123.dmg",
+    "bytes": 458434157,
+    "sha256": "5cf6d057e8944f847dac83d89b4d30d7a49c8974d02d29b35d2cf5afce9e36c1",
+    "native_executable_sha256": "25af5f4eaaae5aca25021f2737e90cc4d41fdf195c4a5c4012ea31a1bba4b86a"
+  },
+  "identity_parsed_with": "Python plistlib; REA native plist command unavailable on Linux",
+  "identity": {
+    "application": {
+      "CFBundleIdentifier": "company.thebrowser.Browser",
+      "CFBundleShortVersionString": "1.170.0",
+      "CFBundleVersion": "89123",
+      "LSMinimumSystemVersion": "13.0.0",
+      "NSPrincipalClass": "Arc.BrowserApp"
+    },
+    "engine": {
+      "CFBundleIdentifier": "company.thebrowser.browser.framework",
+      "CFBundleShortVersionString": "156.0.8078.48",
+      "CFBundleVersion": "8078.48"
+    }
+  },
+  "selected_resources": [
+    {
+      "path": "ARC_BoostsEditor.bundle/Contents/Resources/SelectorPicker.js",
+      "bytes": 11068,
+      "sha256": "0e779dad9316f8b14cf4e1b20fa710240cd90bc9a9a1dd820df38ebd525d977d"
+    },
+    {
+      "path": "ARC_CommandBar.bundle/Contents/Resources/command_bar_behavior.json",
+      "bytes": 285,
+      "sha256": "45f53d197e00dda1808625cb170867a0b39575db97f79e3c7367d254d9dcb3bd"
+    },
+    {
+      "path": "ARC_EaselUI.bundle/Contents/Resources/DisableInlineLinks.js",
+      "bytes": 1383,
+      "sha256": "22541083b829a8f73bf1777964bf5b64c8e320d7e9a86ebe18eaa7597982e307"
+    },
+    {
+      "path": "ARC_WebContentBehaviorConfigurationClient.bundle/Contents/Resources/web_content_behavior.json",
+      "bytes": 23885,
+      "sha256": "5e492cc2b054b626cdc7fa614a6e14ee0c9305e0cec562f3a8c75a2fed4370ba"
+    }
+  ],
+  "rea_javascript": {
+    "evidence_id": "ev_f102aad03ebded9612fea13b8bc551d06c739efbe899833a12689bbf15e2af0b",
+    "full_raw_output_sha256": "7aa2db87cfe48371b4ff82f8581e59002f75824d12536609fe2e4a6e5213ac6e",
+    "statistics": {
+      "relevant_files": 4,
+      "nested_asar_containers": 0,
+      "text_bytes_read": 36621,
+      "invalid_utf8_files": 0,
+      "parsed_javascript_files": 2,
+      "skipped_javascript_files": 0,
+      "visited_ast_nodes": 3619,
+      "findings": 0,
+      "modules": 0,
+      "parse_failures": 0
+    },
+    "application_nodes": 7,
+    "semantic_nodes": 2890,
+    "semantic_relations": 2863,
+    "semantic_unknowns": 898,
+    "semantic_node_kinds": {
+      "parameter": 106,
+      "expression": 1864,
+      "call-site": 210,
+      "property-slot": 279,
+      "binding": 199,
+      "return-site": 86,
+      "literal": 75,
+      "function": 69,
+      "module": 2
+    },
+    "semantic_coverage": {
+      "status": "unknown",
+      "truncated": false,
+      "omitted_nodes": 0,
+      "omitted_relations": 0
+    },
+    "limitations": [
+      "CommonJS and ESM binding relationships were recovered from inert syntax and resolved only within the inventoried artifact container.",
+      "JavaScript and HTML were parsed as inert text; bundle bootstrap code was never executed.",
+      "Static imports, entrypoints, workers, endpoints, and storage relationships do not prove runtime execution.",
+      "Static paths and relationships may remain unresolved when expressions are dynamic or obfuscated.",
+      "Webpack/Rspack factories were recovered from AST literals; REA did not invoke push handlers or bundle bootstrap code."
+    ]
+  },
+  "scope_limits": [
+    "Static inspection of one official Arc release, not complete reverse engineering.",
+    "JavaScript analysis covers only the two selected shipped scripts and two behavior config files.",
+    "Core native behaviors, UI interaction, persistence format and live networking remain unverified.",
+    "Native REA inspect-macho and inspect-plist require macOS and were unavailable on this Linux host.",
+    "No proprietary binaries, scripts, imagery, or fonts are included in this deliverable.",
+    "The original semantic graph is retained privately in the working analysis directory; this file is a metadata projection, not a canonical REA Evidence record."
+  ]
+}

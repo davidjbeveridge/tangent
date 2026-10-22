@@ -1,0 +1,7 @@
+# Enable "Require review from Code Owners" in the main branch ruleset.
+/package.json @davidjbeveridge
+/package-lock.json @davidjbeveridge
+/.github/ @davidjbeveridge
+/electron-builder.release.cjs @davidjbeveridge
+/scripts/ @davidjbeveridge
+/src/main/ @davidjbeveridge

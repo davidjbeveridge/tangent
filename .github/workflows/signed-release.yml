@@ -1,0 +1,130 @@
+name: Create draft signed release
+
+# Optional: manual releases do not need this workflow or any signing secrets.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing stable version tag on main (for example v0.1.0)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: draft-signed-release-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    outputs:
+      sha: ${{ steps.ref.outputs.sha }}
+      tag: ${{ steps.ref.outputs.tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - id: ref
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: node scripts/verify-release-ref.mjs
+
+  verify:
+    needs: resolve
+    uses: ./.github/workflows/check.yml
+    with:
+      ref: ${{ needs.resolve.outputs.sha }}
+
+  package:
+    needs: [resolve, verify]
+    environment: release-signing
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            platform: macos-universal
+          - os: windows-2025
+            platform: windows-x64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.resolve.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - run: npm ci
+      - run: node scripts/check-runtime.mjs --output runtime-versions.json
+      - run: npm run build
+      - name: Build, sign, and notarize macOS universal application
+        if: runner.os == 'macOS'
+        env:
+          TANGENT_RELEASE_BUILD: '1'
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
+          TANGENT_MAC_IDENTITY: ${{ vars.TANGENT_MAC_IDENTITY }}
+        run: npx --no-install electron-builder --config electron-builder.release.cjs --mac dmg zip --universal --publish never
+      - name: Build and sign Windows NSIS application
+        if: runner.os == 'Windows'
+        env:
+          TANGENT_RELEASE_BUILD: '1'
+          WIN_CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          WIN_CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+          TANGENT_WINDOWS_PUBLISHER: ${{ vars.TANGENT_WINDOWS_PUBLISHER }}
+        run: npx --no-install electron-builder --config electron-builder.release.cjs --win nsis --x64 --publish never
+      - name: Verify signatures and update metadata before uploading
+        env:
+          RELEASE_SHA: ${{ needs.resolve.outputs.sha }}
+          RELEASE_PLATFORM: ${{ matrix.platform }}
+          APPLE_TEAM_ID: ${{ vars.APPLE_TEAM_ID }}
+          TANGENT_MAC_IDENTITY: ${{ vars.TANGENT_MAC_IDENTITY }}
+          TANGENT_WINDOWS_PUBLISHER: ${{ vars.TANGENT_WINDOWS_PUBLISHER }}
+        run: node scripts/stage-release.mjs signed
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: tangent-signed-${{ matrix.platform }}
+          path: release-upload/
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+  draft:
+    needs: [resolve, package]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.resolve.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          pattern: tangent-signed-*
+          path: artifacts
+      - name: Verify inventories, write checksums, and create draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_SHA: ${{ needs.resolve.outputs.sha }}
+          RELEASE_TAG: ${{ needs.resolve.outputs.tag }}
+        run: node scripts/create-draft-release.mjs signed

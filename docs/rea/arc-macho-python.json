@@ -1,0 +1,1202 @@
+{
+  "tool": "supplemental Python Mach-O metadata parser",
+  "format": "Mach-O",
+  "sha256": "25af5f4eaaae5aca25021f2737e90cc4d41fdf195c4a5c4012ea31a1bba4b86a",
+  "size": 166089936,
+  "slices": [
+    {
+      "architecture": "x86_64",
+      "offset": 16384,
+      "size": 86264624,
+      "load_commands": 107,
+      "dylibs": [
+        {
+          "path": "/usr/lib/libc++.1.dylib",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libz.1.dylib",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libxml2.2.dylib",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CloudKit.framework/Versions/A/CloudKit",
+          "weak": false
+        },
+        {
+          "path": "@executable_path/../Frameworks/ArcCore.framework/Versions/A/ArcCore",
+          "weak": false
+        },
+        {
+          "path": "@rpath/Lottie.framework/Versions/A/Lottie",
+          "weak": false
+        },
+        {
+          "path": "@rpath/Sparkle.framework/Versions/B/Sparkle",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libobjc.A.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libSystem.B.dylib",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Combine.framework/Versions/A/Combine",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CryptoKit.framework/Versions/A/CryptoKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/GameplayKit.framework/Versions/A/GameplayKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/MetricKit.framework/Versions/A/MetricKit",
+          "weak": true
+        },
+        {
+          "path": "/System/Library/Frameworks/NaturalLanguage.framework/Versions/A/NaturalLanguage",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/QuickLookThumbnailing.framework/Versions/A/QuickLookThumbnailing",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/ScreenCaptureKit.framework/Versions/A/ScreenCaptureKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/ScriptingBridge.framework/Versions/A/ScriptingBridge",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/UserNotifications.framework/Versions/A/UserNotifications",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/WebKit.framework/Versions/A/WebKit",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libcompression.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftAVFoundation.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftAccelerate.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCompression.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCore.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreAudio.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreFoundation.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreImage.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreLocation.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreMIDI.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreMedia.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftDarwin.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftDispatch.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftGLKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftGameplayKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftIOKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftMapKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftMetal.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftMetalKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftModelIO.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftNaturalLanguage.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftOSLog.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftObjectiveC.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftQuartzCore.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftQuickLookUI.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftRegexBuilder.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftSceneKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftSpatial.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftSpriteKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftSynchronization.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftXPC.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswift_Concurrency.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswift_StringProcessing.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftos.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftsimd.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftAppKit.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreGraphics.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftNetwork.dylib",
+          "weak": false
+        },
+        {
+          "path": "@rpath/libswiftCompatibilitySpan.dylib",
+          "weak": true
+        }
+      ],
+      "rpaths": [
+        "/usr/lib/swift",
+        "@executable_path/../Frameworks",
+        "@loader_path/../Frameworks",
+        "@executable_path/Frameworks"
+      ],
+      "sections": [
+        {
+          "section": "__text",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__stubs",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__init_offsets",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__const",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__cstring",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__objc_methname",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_typeref",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__constg_swiftt",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_entry",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_builtin",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_reflstr",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_fieldmd",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_assocty",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_capture",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_proto",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_types",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__objc_methtype",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__objc_classname",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_mpenum",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_protos",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__oslogstring",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift_as_entry",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift_as_ret",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_types2",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__gcc_except_tab",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__ustring",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__unwind_info",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__eh_frame",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__got",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__const",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__cfstring",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_classlist",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_nlclslist",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_catlist",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_protolist",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_imageinfo",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_arraydata",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_arrayobj",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_dictobj",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_const",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_selrefs",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_protorefs",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_classrefs",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_superrefs",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_ivar",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_data",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__data",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_stublist",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__swift_hooks",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__swift51_hooks",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__s_async_hook",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__swift56_hooks",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__thread_vars",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__thread_data",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__thread_bss",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__common",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__bss",
+          "segment": "__DATA"
+        }
+      ],
+      "build": [
+        {
+          "platform": 1,
+          "minimum_os": "13.0.0",
+          "sdk": "26.4.0"
+        }
+      ]
+    },
+    {
+      "architecture": "arm64",
+      "offset": 86294528,
+      "size": 79795408,
+      "load_commands": 107,
+      "dylibs": [
+        {
+          "path": "/usr/lib/libc++.1.dylib",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libz.1.dylib",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libxml2.2.dylib",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Security.framework/Versions/A/Security",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CloudKit.framework/Versions/A/CloudKit",
+          "weak": false
+        },
+        {
+          "path": "@executable_path/../Frameworks/ArcCore.framework/Versions/A/ArcCore",
+          "weak": false
+        },
+        {
+          "path": "@rpath/Lottie.framework/Versions/A/Lottie",
+          "weak": false
+        },
+        {
+          "path": "@rpath/Sparkle.framework/Versions/B/Sparkle",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libobjc.A.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libSystem.B.dylib",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Carbon.framework/Versions/A/Carbon",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Combine.framework/Versions/A/Combine",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreData.framework/Versions/A/CoreData",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreLocation.framework/Versions/A/CoreLocation",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/CryptoKit.framework/Versions/A/CryptoKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/GameplayKit.framework/Versions/A/GameplayKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/MetricKit.framework/Versions/A/MetricKit",
+          "weak": true
+        },
+        {
+          "path": "/System/Library/Frameworks/NaturalLanguage.framework/Versions/A/NaturalLanguage",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/PDFKit.framework/Versions/A/PDFKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/QuickLookThumbnailing.framework/Versions/A/QuickLookThumbnailing",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/ScreenCaptureKit.framework/Versions/A/ScreenCaptureKit",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/ScriptingBridge.framework/Versions/A/ScriptingBridge",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/UserNotifications.framework/Versions/A/UserNotifications",
+          "weak": false
+        },
+        {
+          "path": "/System/Library/Frameworks/WebKit.framework/Versions/A/WebKit",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/libcompression.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftAVFoundation.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftAccelerate.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCompression.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCore.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreAudio.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreFoundation.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreImage.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreLocation.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreMIDI.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreMedia.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftDarwin.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftDispatch.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftGLKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftGameplayKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftIOKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftMapKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftMetal.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftMetalKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftModelIO.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftNaturalLanguage.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftOSLog.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftObjectiveC.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftQuartzCore.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftQuickLookUI.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftRegexBuilder.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftSceneKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftSpatial.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftSpriteKit.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftSynchronization.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftXPC.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswift_Concurrency.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswift_StringProcessing.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftos.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftsimd.dylib",
+          "weak": true
+        },
+        {
+          "path": "/usr/lib/swift/libswiftAppKit.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftCoreGraphics.dylib",
+          "weak": false
+        },
+        {
+          "path": "/usr/lib/swift/libswiftNetwork.dylib",
+          "weak": false
+        },
+        {
+          "path": "@rpath/libswiftCompatibilitySpan.dylib",
+          "weak": true
+        }
+      ],
+      "rpaths": [
+        "/usr/lib/swift",
+        "@executable_path/../Frameworks",
+        "@loader_path/../Frameworks",
+        "@executable_path/Frameworks"
+      ],
+      "sections": [
+        {
+          "section": "__text",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__stubs",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__objc_stubs",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__init_offsets",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__objc_methlist",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__const",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__cstring",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_typeref",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__constg_swiftt",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_entry",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_builtin",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_reflstr",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_fieldmd",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_assocty",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_capture",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_proto",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_types",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__objc_methname",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__objc_methtype",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__objc_classname",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_mpenum",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_protos",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__oslogstring",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift_as_entry",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift_as_ret",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__swift5_types2",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__gcc_except_tab",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__ustring",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__unwind_info",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__eh_frame",
+          "segment": "__TEXT"
+        },
+        {
+          "section": "__got",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__const",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__cfstring",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_classlist",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_nlclslist",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_catlist",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_protolist",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_imageinfo",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_arraydata",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_arrayobj",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_dictobj",
+          "segment": "__DATA_CONST"
+        },
+        {
+          "section": "__objc_const",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_selrefs",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_protorefs",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_classrefs",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_superrefs",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_ivar",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_data",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__data",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__objc_stublist",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__s_async_hook",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__swift56_hooks",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__thread_vars",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__thread_data",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__thread_bss",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__common",
+          "segment": "__DATA"
+        },
+        {
+          "section": "__bss",
+          "segment": "__DATA"
+        }
+      ],
+      "build": [
+        {
+          "platform": 1,
+          "minimum_os": "13.0.0",
+          "sdk": "26.4.0"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Metadata only; no disassembly, decompilation, or runtime observation.",
+    "Declared library loads do not establish executed functionality."
+  ]
+}

@@ -1,0 +1,73 @@
+name: Create draft manual release
+
+# Unsigned installers work without signing credentials. Creating a draft does
+# not publish it or notify installed applications of an update.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing stable version tag on main (for example v0.1.0)
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: draft-manual-release-${{ inputs.tag }}
+  cancel-in-progress: false
+
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    outputs:
+      sha: ${{ steps.ref.outputs.sha }}
+      version: ${{ steps.ref.outputs.version }}
+      tag: ${{ steps.ref.outputs.tag }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - id: ref
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: node scripts/verify-release-ref.mjs
+
+  build:
+    needs: resolve
+    uses: ./.github/workflows/release.yml
+    with:
+      ref: ${{ needs.resolve.outputs.sha }}
+      artifact-prefix: tangent-manual
+
+  draft:
+    needs: [resolve, build]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.resolve.outputs.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          pattern: tangent-manual-*
+          path: artifacts
+      - name: Verify inventories, write checksums, and create draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_SHA: ${{ needs.resolve.outputs.sha }}
+          RELEASE_TAG: ${{ needs.resolve.outputs.tag }}
+        run: node scripts/create-draft-release.mjs manual

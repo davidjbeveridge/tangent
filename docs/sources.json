@@ -1,0 +1,144 @@
+{
+  "researched_at": "2026-10-22",
+  "method": "First-party public documentation; not live Arc runtime or binary analysis",
+  "limitations": [
+    "Several Arc help articles returned 404 through direct open; indexed content/excerpts were used and explicitly labeled.",
+    "Release notes establish historical features, not exact current runtime parity.",
+    "No proprietary source or resources copied."
+  ],
+  "sources": [
+    {
+      "id": "arc_profiles",
+      "title": "Profiles: Separate Work & Personal Browsing",
+      "url": "https://resources.arc.net/hc/en-us/articles/19227964556183-Profiles-Separate-Work-Personal-Browsing",
+      "access": "indexed_primary",
+      "supports": "Profile owns session state, history, favorites, settings and archive cadence; may serve multiple Spaces."
+    },
+    {
+      "id": "arc_spaces",
+      "title": "Spaces: Distinct Browsing Areas",
+      "url": "https://resources.arc.net/hc/en-us/articles/19228064149143-Spaces-Distinct-Browsing-Areas",
+      "access": "indexed_primary",
+      "supports": "Per-Space pinned/unpinned sections, theme/icon; Space switching."
+    },
+    {
+      "id": "arc_favorites",
+      "title": "Favorites: Top Tabs Across Every Space",
+      "url": "https://resources.arc.net/hc/en-us/articles/19230755904151-Favorites-Top-Tabs-Across-Every-Space",
+      "access": "opened_primary",
+      "supports": "Top sidebar favorites available across Spaces; 12 item limit."
+    },
+    {
+      "id": "arc_pinned",
+      "title": "Pinned Tabs: Tabs you want to stick around",
+      "url": "https://resources.arc.net/hc/en-us/articles/19231060187159-Pinned-Tabs-Tabs-you-want-to-stick-around",
+      "access": "indexed_primary",
+      "supports": "Space-scoped saved tabs; archive exemption; pin shortcut."
+    },
+    {
+      "id": "arc_archive",
+      "title": "Auto Archive: Clean as you go",
+      "url": "https://resources.arc.net/hc/en-us/articles/19228855311127-Auto-Archive-Clean-as-you-go",
+      "access": "indexed_primary",
+      "supports": "12 idle hours default; activity resets timer; configurable cadence; restore."
+    },
+    {
+      "id": "arc_folders",
+      "title": "Folders: Stash Similar Tabs Together",
+      "url": "https://resources.arc.net/hc/en-us/articles/19228419623447-Folders-Stash-Similar-Tabs-Together",
+      "access": "indexed_primary",
+      "supports": "Folder grouping; no auto archive."
+    },
+    {
+      "id": "arc_peek",
+      "title": "Peek: Preview Sites From Pinned Tabs",
+      "url": "https://resources.arc.net/hc/en-us/articles/19335302900887-Peek-Preview-Sites-From-Pinned-Tabs",
+      "access": "primary_search_excerpt",
+      "supports": "Transient pinned/favorite link preview, promote/split/close. Exact current heuristics not verified."
+    },
+    {
+      "id": "arc_split",
+      "title": "Split View: View Multiple Tabs at Once",
+      "url": "https://resources.arc.net/hc/en-us/articles/19335393146775-Split-View-View-Multiple-Tabs-at-Once",
+      "access": "primary_search_excerpt",
+      "supports": "Feature identity; detailed mechanics established via release notes."
+    },
+    {
+      "id": "arc_shortcuts",
+      "title": "Keyboard Shortcuts",
+      "url": "https://resources.arc.net/hc/en-us/articles/20595231349911-Keyboard-Shortcuts",
+      "access": "primary_search_excerpt",
+      "supports": "New tab and close-current shortcuts; exhaustive map not recovered."
+    },
+    {
+      "id": "arc_mac_2023",
+      "title": "Arc for macOS - 2023 Release Notes",
+      "url": "https://resources.arc.net/hc/en-us/articles/20498377604887-Arc-for-macOS-2023-Release-Notes",
+      "access": "indexed_primary",
+      "supports": "Historical Shift-click Peek, split orientation and per-pane URLs."
+    },
+    {
+      "id": "arc_mac_2024_2026",
+      "title": "Arc for macOS - 2024 - 2026 Release Notes",
+      "url": "https://resources.arc.net/hc/en-us/articles/20498293324823-Arc-for-macOS-2024-2026-Release-Notes",
+      "access": "indexed_primary",
+      "supports": "Historical four-tab split cap, drag-to-split and profile-filtering bugfix context."
+    },
+    {
+      "id": "arc_windows_notes",
+      "title": "Arc for Windows - 2023-2026 Release Notes",
+      "url": "https://resources.arc.net/hc/en-us/articles/22513842649623-Arc-for-Windows-2023-2026-Release-Notes",
+      "access": "indexed_primary",
+      "supports": "Pinned URL recovery; command actions; Peek controls; draggable split dividers."
+    },
+    {
+      "id": "electron_views",
+      "title": "WebContentsView",
+      "url": "https://www.electronjs.org/docs/latest/api/web-contents-view",
+      "access": "opened_primary",
+      "supports": "Native web-content surface and bounds."
+    },
+    {
+      "id": "electron_browser_view",
+      "title": "BrowserView",
+      "url": "https://www.electronjs.org/docs/latest/api/browser-view",
+      "access": "indexed_primary",
+      "supports": "Deprecated in favor of WebContentsView."
+    },
+    {
+      "id": "electron_session",
+      "title": "session",
+      "url": "https://www.electronjs.org/docs/latest/api/session",
+      "access": "opened_primary",
+      "supports": "Persistent partition semantics and session API."
+    },
+    {
+      "id": "electron_contents",
+      "title": "webContents",
+      "url": "https://www.electronjs.org/docs/latest/api/web-contents",
+      "access": "opened_primary",
+      "supports": "Navigation/title/favicon/load events and window-open handler."
+    },
+    {
+      "id": "electron_window",
+      "title": "BaseWindow",
+      "url": "https://www.electronjs.org/docs/latest/api/base-window",
+      "access": "indexed_primary",
+      "supports": "Explicit child webContents lifetime management."
+    },
+    {
+      "id": "electron_download",
+      "title": "DownloadItem",
+      "url": "https://www.electronjs.org/docs/latest/api/download-item",
+      "access": "indexed_primary",
+      "supports": "Download event, save-path and dialog behavior."
+    },
+    {
+      "id": "electron_security",
+      "title": "Security",
+      "url": "https://www.electronjs.org/docs/latest/tutorial/security",
+      "access": "opened_primary",
+      "supports": "Untrusted-content risk; isolation, sandbox, permission, IPC, protocol and update guidance."
+    }
+  ]
+}
