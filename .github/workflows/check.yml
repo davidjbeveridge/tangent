@@ -3,6 +3,7 @@ name: Check
 on:
   push:
     branches: [main]
+    paths-ignore: ['.github/release-request.json']
   pull_request:
   workflow_dispatch:
   workflow_call:
@@ -27,7 +28,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - os: ubuntu-24.04
+          - os: ubuntu-22.04
             platform: linux-x64
           - os: windows-2025
             platform: windows-x64
@@ -49,7 +50,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y xvfb libnss3 libgtk-3-0t64 libasound2t64
+          sudo apt-get install --no-install-recommends -y xvfb libnss3 libgtk-3-0 libasound2
       - run: npm ci
       - name: Verify pinned runtime and record bundled Chromium
         run: node scripts/check-runtime.mjs --output runtime-versions.json

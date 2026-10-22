@@ -8,6 +8,16 @@ import { isNavigableUrl } from '../core/urls';
 import { validateCommand } from '../core/commands';
 import { SessionStorage } from './storage';
 import { UpdateController, createUpdateDriver, loadUpdatePolicy } from './updates';
+import { enforcePackagedSandbox } from './sandbox';
+
+try {
+  enforcePackagedSandbox(app);
+} catch (error) {
+  const message = error instanceof Error ? error.message : 'Tangent requires Chromium sandboxing.';
+  console.error(message);
+  dialog.showErrorBox('Tangent could not start safely', message);
+  app.exit(1);
+}
 
 const UI_URL = 'tangent://app/index.html';
 const CSP = "default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'";

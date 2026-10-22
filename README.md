@@ -13,7 +13,7 @@ Spaces. Vertical tabs. Favorites that stay put. A command bar that gets out of y
 
 No account, subscription, API key, or Arc installation is required to use it.
 
-**Status: early development, version 0.1.0.** Real websites run in real Chromium browsing surfaces. The core browser has been exercised on Linux, including profile isolation, session restore, split view, and popups. This is an experimental browser with substantial work ahead. [Run it from source](#install-and-run) to try it today.
+**Status: early development, version 0.1.0.** Real websites run in real Chromium browsing surfaces. Native browser tests cover macOS on Apple Silicon and Intel, Windows x64, and Linux x64, including profile isolation, session restore, split view, and popups. This is an experimental browser with substantial work ahead. [Get an installer](https://github.com/davidjbeveridge/tangent/releases) or [run it from source](#from-source).
 
 ## Why Tangent exists
 
@@ -42,15 +42,30 @@ Linux needs a graphical desktop and Electron's system libraries. For a headless 
 
 ### Desktop installers
 
-Check [GitHub Releases](https://github.com/davidjbeveridge/tangent/releases) for packaged builds. Until the first release is published, use the source instructions above. The manual release workflow can build installers without Apple or Windows signing credentials.
+Open [GitHub Releases](https://github.com/davidjbeveridge/tangent/releases) and choose the package for your computer. Each manual release includes `SHA256SUMS` and `BUILDINFO.json` with the source commit, runtime versions, and package hashes. No Apple or Windows signing credentials are needed to build these installers.
 
 | Platform | Package | Installation |
 | --- | --- | --- |
-| macOS | DMG and ZIP, with architecture named in the filename | Open the DMG and drag Tangent into Applications |
-| Windows | x64 NSIS installer | Run the installer and follow its prompts |
-| Linux | x64 AppImage | Mark the file executable with `chmod +x`, then run it |
+| macOS, Apple Silicon | `Tangent-<version>-mac-arm64.dmg` | Open the DMG and drag Tangent into Applications |
+| macOS, Intel | `Tangent-<version>-mac-x64.dmg` | Open the DMG and drag Tangent into Applications |
+| Windows, x64 | `Tangent-<version>-win-x64.exe` | Run the installer and follow its prompts |
+| Linux, x64 | `Tangent-<version>-linux-x86_64.AppImage` | Mark the file executable with `chmod +x`, then run it |
 
-Read the release notes before installing. Manual macOS builds use ad hoc signing without a developer certificate; they are not notarized or authenticated to a publisher. These builds and unsigned Windows builds may trigger operating-system warnings and are intended for development and evaluation. If an installer is blocked, run from source instead of disabling platform security protections. A package build alone does not establish that its platform has passed a native install or upgrade test.
+On a Mac, **Apple menu > About This Mac** identifies an Apple chip or Intel processor. ZIP copies of both macOS builds are also included; extract one and move `Tangent.app` into Applications. Windows ARM64 and Linux ARM64 packages are not included in this release.
+
+Read the release notes before installing. Manual macOS builds use ad hoc signing without a developer certificate; they are not notarized or authenticated to a publisher. These builds and unsigned Windows builds may trigger operating-system warnings and are intended for development and evaluation. If an installer is blocked, use the source instructions above. Keep platform security protections enabled. Release checks exercise the packaged browser in clean CI environments; they do not certify every operating-system configuration or an upgrade from every previous version.
+
+**Linux requirements:** The AppImage needs a working Chromium sandbox, including permission to use unprivileged user namespaces. Ubuntu 24.04 and other restricted configurations can block this. Tangent will not silently turn the sandbox off. Linux release checks use Ubuntu 22.04; source builds need a working sandbox too. See the [AppImage sandbox requirements](https://docs.appimage.org/user-guide/troubleshooting/electron-sandboxing.html).
+
+If only FUSE is unavailable, [AppImage supports extracting the package](https://docs.appimage.org/user-guide/troubleshooting/fuse.html#extract-and-run-type-2-appimages). From a directory containing the downloaded file:
+
+```sh
+chmod +x Tangent-0.1.0-linux-x86_64.AppImage
+./Tangent-0.1.0-linux-x86_64.AppImage --appimage-extract
+./squashfs-root/AppRun
+```
+
+Extraction does not remove the sandbox requirement. Keep the extracted directory together, since it contains the runtime and resources.
 
 ## Update without signing
 
@@ -91,7 +106,7 @@ Common commands for checking a downloaded file:
 shasum -a 256 "Tangent-0.1.0-mac-arm64.dmg"
 
 # Linux
-sha256sum "Tangent-0.1.0-linux-x64.AppImage"
+sha256sum "Tangent-0.1.0-linux-x86_64.AppImage"
 ```
 
 ```powershell

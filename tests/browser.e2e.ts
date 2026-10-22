@@ -34,6 +34,7 @@ test.beforeAll(async () => {
 });
 async function launch(profile: string) {
   browser = await electron.launch({
+    chromiumSandbox: true,
     args: [...(process.getuid?.() === 0 ? ['--no-sandbox'] : []), '.'], cwd: resolve('.'),
     env: { ...process.env, DISPLAY: process.env.DISPLAY || ':93', TANGENT_USER_DATA: profile }, timeout: 30_000,
   });

@@ -1,20 +1,32 @@
-name: Create draft manual release
+name: Release manual installers
 
-# Unsigned installers work without signing credentials. Creating a draft does
-# not publish it or notify installed applications of an update.
+# A reviewed request names one immutable commit. Publication requires the
+# explicit publish boolean; omitting it prepares an unpublished draft.
 on:
+  push:
+    branches: [main]
+    paths: ['.github/release-request.json']
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing stable version tag on main (for example v0.1.0)
+        description: Stable version tag (for example v0.1.0)
         required: true
         type: string
+      source-sha:
+        description: Exact 40-character main commit (leave empty only for an existing tag)
+        required: false
+        type: string
+      publish:
+        description: Publish after every source, installer, and uploaded checksum gate passes
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
 
 concurrency:
-  group: draft-manual-release-${{ inputs.tag }}
+  group: manual-release
   cancel-in-progress: false
 
 jobs:
@@ -24,10 +36,12 @@ jobs:
       sha: ${{ steps.ref.outputs.sha }}
       version: ${{ steps.ref.outputs.version }}
       tag: ${{ steps.ref.outputs.tag }}
+      publish: ${{ steps.ref.outputs.publish }}
+      request-sha: ${{ steps.ref.outputs.request-sha }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          ref: main
+          ref: ${{ github.sha }}
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
@@ -37,7 +51,9 @@ jobs:
       - id: ref
         env:
           RELEASE_TAG: ${{ inputs.tag }}
-        run: node scripts/verify-release-ref.mjs
+          RELEASE_SOURCE_SHA: ${{ inputs.source-sha }}
+          RELEASE_PUBLISH: ${{ inputs.publish }}
+        run: node scripts/resolve-release-request.mjs
 
   build:
     needs: resolve
@@ -46,7 +62,7 @@ jobs:
       ref: ${{ needs.resolve.outputs.sha }}
       artifact-prefix: tangent-manual
 
-  draft:
+  release:
     needs: [resolve, build]
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -65,9 +81,12 @@ jobs:
         with:
           pattern: tangent-manual-*
           path: artifacts
-      - name: Verify inventories, write checksums, and create draft
+      - name: Verify installers and publish only when explicitly requested
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_SHA: ${{ needs.resolve.outputs.sha }}
           RELEASE_TAG: ${{ needs.resolve.outputs.tag }}
+          RELEASE_REQUEST_SHA: ${{ needs.resolve.outputs.request-sha }}
+          RELEASE_ALLOW_TAG_CREATION: 'true'
+          RELEASE_PUBLISH: ${{ needs.resolve.outputs.publish }}
         run: node scripts/create-draft-release.mjs manual

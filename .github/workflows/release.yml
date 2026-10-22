@@ -37,7 +37,7 @@ jobs:
           - os: macos-15-intel
             platform: macos-x64
             command: npm run dist:mac -- --x64 --publish never
-          - os: ubuntu-24.04
+          - os: ubuntu-22.04
             platform: linux-x64
             command: npm run dist:linux -- --x64 --publish never
           - os: windows-2025
@@ -56,10 +56,21 @@ jobs:
         with:
           node-version: '24'
           cache: npm
+      - name: Install Linux sandboxed desktop test dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y xvfb libnss3 libgtk-3-0 libasound2
       - run: npm ci
       - run: node scripts/check-runtime.mjs --output runtime-versions.json
       - name: Build unsigned platform package
         run: ${{ matrix.command }}
+      - name: Smoke check delivered AppImage with Chromium sandbox enabled
+        if: runner.os == 'Linux'
+        run: xvfb-run --auto-servernum --server-args="-screen 0 1440x1000x24 -nolisten tcp" node scripts/check-packaged.mjs --output packaged-smoke.json
+      - name: Smoke check delivered macOS or Windows installers
+        if: runner.os != 'Linux'
+        run: node scripts/check-packaged.mjs --output packaged-smoke.json
       - name: Inventory manual installers
         env:
           RELEASE_SHA: ${{ inputs.ref || github.sha }}
@@ -72,3 +83,13 @@ jobs:
           if-no-files-found: error
           retention-days: 14
           compression-level: 0
+      - name: Retain packaged smoke evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: packaged-smoke-${{ matrix.platform }}
+          path: |
+            packaged-smoke.json
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 14

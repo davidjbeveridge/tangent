@@ -1,6 +1,12 @@
 node_modules/
 dist/
 release/
+/release-upload/
+/draft-assets/
+/artifacts/
+/packaged-smoke.json
+/runtime-versions.json
+/release-notes.md
 test-results/
 playwright-report/
 .DS_Store

@@ -19,6 +19,7 @@ If private reporting is unavailable, contact a repository maintainer through an 
 ## Boundaries to preserve
 
 - HTTP(S) page contents run with sandboxing, context isolation and web security enabled, with Node integration disabled.
+- Packaged builds force Chromium sandboxing before creating web contents and reject sandbox-disabling launch flags. The AppImage launcher preserves that policy when the host lacks user namespaces; it fails to launch instead of falling back to an unprotected browser. Linux requires a regular user account and a system policy that permits Chromium's sandbox.
 - Only the local shell receives the Tangent preload bridge. Privileged IPC validates sender, frame, origin and command payload.
 - Profiles select separate persistent Chromium session partitions. Several Spaces may intentionally share one Profile.
 - Navigation and popup handling validate URLs and preserve the originating browsing context. Website-controlled URLs must not be handed directly to OS execution.

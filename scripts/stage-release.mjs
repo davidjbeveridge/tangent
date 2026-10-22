@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { copyFileSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { execFileSync } from 'node:child_process';
+import { verifyPackagedSmoke } from './release-data.mjs';
 
 const mode = process.argv[2];
 assert(['manual', 'signed'].includes(mode), 'Use manual or signed');
@@ -52,7 +53,12 @@ const files = names.sort().map(name => {
   copyFileSync(source, join('release-upload', name));
   return { name, size: data.length, sha256: createHash('sha256').update(data).digest('hex') };
 });
+let packagedSmoke;
+if (mode === 'manual') {
+  packagedSmoke = JSON.parse(readFileSync('packaged-smoke.json', 'utf8'));
+  verifyPackagedSmoke(packagedSmoke, platform, manifest.version, runtime, files);
+}
 writeFileSync(`release-upload/build-${platform}.json`, JSON.stringify({
-  schemaVersion: 1, mode, platform, commit: sha, version: manifest.version, runtime, files,
+  schemaVersion: 1, mode, platform, commit: sha, version: manifest.version, runtime, packagedSmoke, files,
 }, null, 2) + '\n');
 console.log(`Verified ${mode} inventory for ${platform}: ${files.map(file => file.name).join(', ')}`);

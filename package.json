@@ -40,6 +40,10 @@
     "appId": "org.tangentbrowser.desktop",
     "productName": "Tangent",
     "asar": true,
+    "afterPack": "scripts/after-pack.cjs",
+    "toolsets": {
+      "appimage": "1.0.3"
+    },
     "directories": {
       "output": "release"
     },
@@ -78,11 +82,15 @@
       "identity": "-"
     },
     "linux": {
+      "executableName": "tangent-browser",
       "category": "Network;WebBrowser;",
       "target": [
         "AppImage"
       ],
       "icon": "build/icon.png"
+    },
+    "appImage": {
+      "executableArgs": []
     },
     "win": {
       "target": [
