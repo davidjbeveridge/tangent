@@ -4,6 +4,15 @@ name: Build unsigned installers
 on:
   push:
     tags: ['v*']
+  pull_request:
+    paths:
+      - package.json
+      - package-lock.json
+      - build/**
+      - scripts/after-pack.cjs
+      - scripts/check-packaged.mjs
+      - .github/workflows/release.yml
+      - .github/workflows/check.yml
   workflow_dispatch:
   workflow_call:
     inputs:
@@ -64,6 +73,10 @@ jobs:
       - run: npm ci
       - run: node scripts/check-runtime.mjs --output runtime-versions.json
       - name: Build unsigned platform package
+        env:
+          # Permit the configured macOS identity "-" to reseal bundles ad hoc.
+          # This PR job has no signing credentials; identity discovery is disabled.
+          CSC_FOR_PULL_REQUEST: 'true'
         run: ${{ matrix.command }}
       - name: Smoke check delivered AppImage with Chromium sandbox enabled
         if: runner.os == 'Linux'

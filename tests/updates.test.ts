@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { serializeToYaml } from 'builder-util';
 import {
   UpdateController, UPDATE_FEED, SOURCE_UPDATE_MESSAGE, STARTUP_CHECK_DELAY_MS, UPDATE_CHECK_INTERVAL_MS,
   validateUpdatePolicy, loadUpdatePolicy, isExpectedMacSignature, isNewerStableVersion, verifyWindowsSignature,
@@ -78,6 +79,52 @@ test('policy loading fails closed on absent, invalid and oversized resources', (
     assert.equal(loadUpdatePolicy(true, 'win32', directory).enabled, false);
     writeFileSync(join(directory, 'update-policy.json'), ' '.repeat(65537));
     assert.equal(loadUpdatePolicy(true, 'win32', directory).enabled, false);
+  } finally { rmSync(directory, { recursive: true, force: true }); }
+});
+
+test('packaged policies accept the actual builder YAML serializer on Windows and macOS', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'tangent-builder-yaml-'));
+  try {
+    // Builder/updater retain their YAML 4 dependency; the application uses YAML 5.
+    // Exercise their real serializer, including the publisher-name sequence.
+    const cases = [
+      { platform: 'win32', policy, manifest },
+      { platform: 'darwin', policy: { ...UPDATE_FEED, schemaVersion: 1, enabled: true, platform: 'darwin', macTeamId: 'A1B2C3D4E5' },
+        manifest: { ...UPDATE_FEED, updaterCacheDirName: 'tangent-browser-updater' } },
+    ];
+    for (const sample of cases) {
+      writeFileSync(join(directory, 'update-policy.json'), JSON.stringify(sample.policy));
+      const yaml = serializeToYaml(sample.manifest);
+      assert.match(yaml, /^provider: github/m);
+      writeFileSync(join(directory, 'app-update.yml'), `\uFEFF---\n${yaml}`);
+      const gate = loadUpdatePolicy(true, sample.platform, directory);
+      assert.equal(gate.enabled, true, sample.platform);
+      if (gate.enabled) assert.deepEqual(gate.policy, sample.policy);
+    }
+  } finally { rmSync(directory, { recursive: true, force: true }); }
+});
+
+test('packaged YAML rejects graphs, excessive nesting and ambiguous merge overrides', () => {
+  const directory = mkdtempSync(join(tmpdir(), 'tangent-bounded-yaml-'));
+  try {
+    writeFileSync(join(directory, 'update-policy.json'), JSON.stringify(policy));
+    const valid = serializeToYaml(manifest);
+    const invalid = [
+      '',
+      `${valid}\n---\n${valid}`, // Never select one document from a stream silently.
+      `${valid}\nextra: &loop [*loop]\n`,
+      `${valid}\nanchor: &shared value\nextra: *shared\n`,
+      `${valid}\nextra: ${'['.repeat(17)}value${']'.repeat(17)}\n`,
+      `${valid}\n<<: {host: unexpected.example}\n`, // YAML 4 would merge this; YAML 5 treats it as data.
+      `${valid}\nextra: !!js/function 'function () {}'\n`,
+      `${valid}\n# ${'é'.repeat(33_000)}\n`, // The file limit is bytes, not JavaScript string length.
+    ];
+    for (const source of invalid) {
+      writeFileSync(join(directory, 'app-update.yml'), source);
+      assert.equal(loadUpdatePolicy(true, 'win32', directory).enabled, false, source.slice(0, 200));
+    }
+    writeFileSync(join(directory, 'app-update.yml'), valid);
+    assert.equal(loadUpdatePolicy(true, 'win32', directory).enabled, true, 'Rejected configuration must not poison the next load');
   } finally { rmSync(directory, { recursive: true, force: true }); }
 });
 

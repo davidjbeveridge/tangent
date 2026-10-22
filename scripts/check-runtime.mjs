@@ -30,6 +30,11 @@ assert.equal(probe.status, 0, `Electron runtime probe failed: ${probe.stderr}`);
 const versions = JSON.parse(probe.stdout);
 assert.equal(versions.electron, manifest.devDependencies.electron, 'Electron executable does not match the pinned package');
 assert(/^\d+\.\d+\.\d+\.\d+$/.test(versions.chrome), 'Bundled Chromium version is missing');
+const nodeTypesVersion = require('@types/node/package.json').version;
+assert.equal(nodeTypesVersion, lock.packages?.['node_modules/@types/node']?.version,
+  'Installed Node types differ from the lockfile; run npm ci');
+assert.equal(nodeTypesVersion.split('.')[0], versions.node.split('.')[0],
+  `@types/node ${nodeTypesVersion} must target Electron's bundled Node ${versions.node}; newer host APIs may not exist in the browser`);
 const record = {
   application: manifest.version,
   electron: versions.electron,

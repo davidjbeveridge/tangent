@@ -28,13 +28,12 @@
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
-    "@types/js-yaml": "4.0.9",
     "@types/node": "^24.0.0",
     "electron": "45.0.0",
     "electron-builder": "26.15.3",
     "esbuild": "0.28.2",
     "tsx": "4.23.15",
-    "typescript": "^5.9.0"
+    "typescript": "^7.0.2"
   },
   "build": {
     "appId": "org.tangentbrowser.desktop",
@@ -107,7 +106,14 @@
   },
   "dependencies": {
     "electron-updater": "6.8.9",
-    "js-yaml": "4.3.2"
+    "js-yaml": "5.5.0"
+  },
+  "overrides": {
+    "@electron/get@3.1.0": {
+      "global-agent@3.0.0": {
+        "roarr": "3.3.0"
+      }
+    }
   },
   "repository": {
     "type": "git",

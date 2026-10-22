@@ -2,7 +2,7 @@ import { readFileSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { load as loadYaml } from 'js-yaml';
+import { CORE_SCHEMA, load as loadYaml } from 'js-yaml';
 import type { Logger } from 'electron-updater';
 import { verifySignature } from 'electron-updater/out/windowsExecutableCodeSignatureVerifier';
 import type { UpdateState } from '../shared/types';
@@ -42,6 +42,9 @@ export function validateUpdatePolicy(isPackaged: boolean, platform: string, poli
     return unsupported('Automatic updates are disabled in this build. Install an official signed release to enable them.');
   }
   if (!dictionary(manifest)) return unsupported('Automatic updates are disabled because the packaged update configuration is missing.');
+  // Builder/updater still use YAML 4, where this key can merge hidden overrides.
+  // Our YAML 1.2 parser treats it as data, so reject ambiguous configurations.
+  if (Object.hasOwn(manifest, '<<')) return unsupported('Automatic updates are disabled because the release feed contains unsupported merge configuration.');
   for (const [key, value] of Object.entries(UPDATE_FEED)) {
     if (policy[key] !== value || manifest[key] !== value) return unsupported('Automatic updates are disabled because the release feed does not match Tangent’s stable channel.');
   }
@@ -71,7 +74,10 @@ function readSmallFile(path: string): string {
 export function loadUpdatePolicy(isPackaged: boolean, platform: string, resourcesPath: string): UpdateGate {
   if (!isPackaged || !['darwin', 'win32'].includes(platform)) return validateUpdatePolicy(isPackaged, platform, undefined, undefined);
   try {
-    return validateUpdatePolicy(isPackaged, platform, JSON.parse(readSmallFile(join(resourcesPath, 'update-policy.json'))), loadYaml(readSmallFile(join(resourcesPath, 'app-update.yml'))));
+    // Generated app-update.yml is a shallow mapping of scalar values and a
+    // publisher-name list. It needs neither recursive graphs nor YAML aliases.
+    const manifest = loadYaml(readSmallFile(join(resourcesPath, 'app-update.yml')), { schema: CORE_SCHEMA, maxDepth: 16, maxAliases: 0 });
+    return validateUpdatePolicy(isPackaged, platform, JSON.parse(readSmallFile(join(resourcesPath, 'update-policy.json'))), manifest);
   } catch {
     return unsupported('Automatic updates are disabled because this installation has no valid signed release configuration.');
   }
