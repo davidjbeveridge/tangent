@@ -105,7 +105,7 @@
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
   },
   "dependencies": {
-    "electron-updater": "6.8.9",
+    "electron-updater": "6.8.11",
     "js-yaml": "5.5.0"
   },
   "overrides": {
